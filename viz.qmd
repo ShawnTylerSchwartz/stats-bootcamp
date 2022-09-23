@@ -16,7 +16,7 @@ incremental: false
 
 > The greatest value of a picture is when it forces us to notice what we never expected to see. --John Tukey
 
--   ALWAYS PLOT YOUR DATA!
+-   **ALWAYS PLOT YOUR DATA!**
 
 ------------------------------------------------------------------------
 
@@ -40,7 +40,9 @@ incremental: false
 #| echo: true
 #| code-fold: false 
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 library(tidyverse)
 
@@ -58,9 +60,12 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: false 
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
-plot(x = df.diamonds$carat, y = df.diamonds$price)
+plot(x = df.diamonds$carat, 
+     y = df.diamonds$price)
 ```
 
 ## Plotting data... the `base R` way
@@ -71,7 +76,9 @@ plot(x = df.diamonds$carat, y = df.diamonds$price)
 #| echo: true
 #| code-fold: false 
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 plot(x = df.diamonds$carat, 
      y = df.diamonds$price, 
@@ -94,7 +101,9 @@ plot(x = df.diamonds$carat,
 #| echo: true
 #| code-fold: true 
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # first, let's reproduce the base R plot from above
 df.diamonds %>% 
@@ -116,7 +125,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # what happens if we color the data points by their cut
 df.diamonds %>% 
@@ -139,7 +150,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # it looks like the relationship may by influenced by the cut variable
 # let's replot these relationships separately by just adding a 1 line of code!
@@ -164,7 +177,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # first, the most basic histogram
 df.diamonds %>% 
@@ -180,7 +195,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # what is the distribution of price by clarity in this data set?
 df.diamonds %>% 
@@ -198,7 +215,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # what is the distribution of price by clarity in this data set, for just the
 # Very Good and Ideal diamonds?
@@ -222,7 +241,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # let's first see what the mean and sd weight is by each cut of diamond
 df.diamonds %>% 
@@ -237,7 +258,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # now, let's make a fancy (and descriptive) plot of these means using the
 # stat_summary() function
@@ -271,7 +294,9 @@ df.diamonds %>%
 #| echo: true
 #| code-fold: false
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 4
 
 # load a copy of the ChickWeight data frame
 df.cw <- ChickWeight
@@ -283,7 +308,6 @@ df.cw <- ChickWeight
 #| echo: true
 #| code-fold: false
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
 
 # Task 1: use your tidyverse knowledge to summarize the mean weight of all 
 # chicks for each diet
@@ -295,7 +319,6 @@ df.cw <- ChickWeight
 #| echo: true
 #| code-fold: false
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
 
 # Task 2: now make a plot that contains the mean and 95% CI for each diet
 ```
@@ -306,7 +329,6 @@ df.cw <- ChickWeight
 #| echo: true
 #| code-fold: false
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
 
 # Task 3: you're now interested in seeing whether the distribution of
 # chick weights varies as a function of time. Make a publication-ready 
@@ -320,7 +342,6 @@ df.cw <- ChickWeight
 #| echo: true
 #| code-fold: false
 #| code-summary: "Show me the code"
-#| code-overflow: wrap
 
 # Task 4: it has come to your attention that different researchers 
 # collected data from different chicks over the course of the experiment, 

@@ -401,7 +401,7 @@
 <p>The greatest value of a picture is when it forces us to notice what we never expected to see. –John Tukey</p>
 </blockquote>
 <ul>
-<li>ALWAYS PLOT YOUR DATA!</li>
+<li><strong>ALWAYS PLOT YOUR DATA!</strong></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -426,8 +426,9 @@
 <blockquote>
 <p><code>diamonds</code>: A dataset containing the prices and other attributes of almost 54,000 diamonds. The variables are as follows:</p>
 </blockquote>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># create a copy of the built-in "diamonds" dataset to manipulate</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a>df.diamonds <span class="ot">&lt;-</span> diamonds</span>
@@ -435,6 +436,7 @@
 <span id="cb1-6"><a href="#cb1-6"></a><span class="co"># preview the data frame</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 10
   carat cut     color clarity depth table price     x     y     z
@@ -446,28 +448,40 @@
 5  0.31 Good    J     SI2      63.3    58   335  4.34  4.35  2.75</code></pre>
 </div>
 </div>
+</div>
 </section>
 <section id="plotting-data-the-base-r-way-1" class="slide level2">
 <h2>Plotting data… the <code>base R</code> way</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df.diamonds<span class="sc">$</span>carat, <span class="at">y =</span> df.diamonds<span class="sc">$</span>price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df.diamonds<span class="sc">$</span>carat, </span>
+<span id="cb3-2"><a href="#cb3-2"></a>     <span class="at">y =</span> df.diamonds<span class="sc">$</span>price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-2-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="plotting-data-the-base-r-way-2" class="slide level2">
 <h2>Plotting data… the <code>base R</code> way</h2>
 <ul>
 <li>We can tweak this a bit using the <code>plot()</code> function settings</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df.diamonds<span class="sc">$</span>carat, </span>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df.diamonds<span class="sc">$</span>carat, </span>
 <span id="cb4-2"><a href="#cb4-2"></a>     <span class="at">y =</span> df.diamonds<span class="sc">$</span>price, </span>
 <span id="cb4-3"><a href="#cb4-3"></a>     <span class="at">xlab =</span> <span class="st">"Carat"</span>, </span>
 <span id="cb4-4"><a href="#cb4-4"></a>     <span class="at">ylab =</span> <span class="st">"Price"</span>, </span>
 <span id="cb4-5"><a href="#cb4-5"></a>     <span class="at">main =</span> <span class="st">"Price of diamonds as a function of their carat (weight)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-3-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section class="slide level2">
 
 <ul>
@@ -482,10 +496,11 @@
 </section>
 <section id="example-1-linear-regression-by-group" class="slide level2">
 <h2>Example 1: Linear regression by group</h2>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># first, let's reproduce the base R plot from above</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># first, let's reproduce the base R plot from above</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
 <span id="cb5-4"><a href="#cb5-4"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat,</span>
@@ -498,15 +513,20 @@
 <span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">ylab</span>(<span class="st">"Price"</span>) <span class="sc">+</span></span>
 <span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-4-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section class="slide level2">
 
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># what happens if we color the data points by their cut</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># what happens if we color the data points by their cut</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
 <span id="cb6-4"><a href="#cb6-4"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat,</span>
@@ -520,15 +540,20 @@
 <span id="cb6-12"><a href="#cb6-12"></a>  <span class="fu">ylab</span>(<span class="st">"Price"</span>) <span class="sc">+</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-5-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section class="slide level2">
 
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># it looks like the relationship may by influenced by the cut variable</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># it looks like the relationship may by influenced by the cut variable</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co"># let's replot these relationships separately by just adding a 1 line of code!</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
@@ -544,30 +569,40 @@
 <span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">ylab</span>(<span class="st">"Price"</span>) <span class="sc">+</span></span>
 <span id="cb7-15"><a href="#cb7-15"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-6-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="lets-plot-some-distributions" class="slide level2">
 <h2>Let’s plot some distributions</h2>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># first, the most basic histogram</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># first, the most basic histogram</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
 <span id="cb8-4"><a href="#cb8-4"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1000</span>) <span class="sc">+</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-7-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="lets-plot-some-distributions-lets-spice-things-up-a-little" class="slide level2">
 <h2>Let’s plot some distributions… let’s spice things up a little</h2>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># what is the distribution of price by clarity in this data set?</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># what is the distribution of price by clarity in this data set?</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
 <span id="cb9-4"><a href="#cb9-4"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> price,</span>
@@ -576,15 +611,20 @@
 <span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(cut)) <span class="sc">+</span></span>
 <span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-8-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="lets-plot-some-distributions-using-some-tidyverse-verbs" class="slide level2">
 <h2>Let’s plot some distributions… using some tidyverse verbs</h2>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># what is the distribution of price by clarity in this data set, for just the</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># what is the distribution of price by clarity in this data set, for just the</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="co"># Very Good and Ideal diamonds?</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">filter</span>(cut <span class="sc">==</span> <span class="st">"Very Good"</span> <span class="sc">|</span> cut <span class="sc">==</span> <span class="st">"Ideal"</span>) <span class="sc">%&gt;%</span> </span>
@@ -595,9 +635,13 @@
 <span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(cut)) <span class="sc">+</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-9-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="some-more-advanced-features-to-make-your-life-easier-stat_summary" class="slide level2">
 <h2>Some more advanced features to make your life easier (<code>stat_summary()</code>)</h2>
 <ul>
@@ -605,15 +649,17 @@
 <li>One way of doing this is to calculate the CI bands separately, put them into a <code>tidy</code> data frame, and then plot the mean and error bars using <code>ggplot2</code> verbs</li>
 <li>But, there’s a convenient function that allows you to summarize over data and do the CI band estimation in 1 step (all within the plot code!!)</li>
 </ul>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># let's first see what the mean and sd weight is by each cut of diamond</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># let's first see what the mean and sd weight is by each cut of diamond</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">group_by</span>(cut) <span class="sc">%&gt;%</span> </span>
 <span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">summarise</span>(<span class="at">mean_price =</span> <span class="fu">mean</span>(carat),</span>
 <span id="cb11-5"><a href="#cb11-5"></a>            <span class="at">sd_price =</span> <span class="fu">sd</span>(carat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   cut       mean_price sd_price
@@ -625,13 +671,15 @@
 5 Ideal          0.703    0.433</code></pre>
 </div>
 </div>
+</div>
 </section>
 <section class="slide level2">
 
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <details>
 <summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># now, let's make a fancy (and descriptive) plot of these means using the</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># now, let's make a fancy (and descriptive) plot of these means using the</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co"># stat_summary() function</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a></span>
 <span id="cb13-4"><a href="#cb13-4"></a>df.diamonds <span class="sc">%&gt;%</span> </span>
@@ -654,36 +702,44 @@
 <span id="cb13-21"><a href="#cb13-21"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">3000</span>, <span class="dv">5500</span>)) <span class="sc">+</span></span>
 <span id="cb13-22"><a href="#cb13-22"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="viz_files/figure-revealjs/unnamed-chunk-11-1.png" width="576"></p>
 </div>
-<img data-src="viz_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="now-its-your-turn" class="slide level2">
 <h2>Now it’s your turn</h2>
 <blockquote>
 <p>The <code>ChickWeight</code> data frame has 578 rows and 4 columns from an experiment on the effect of diet on early growth of chicks.</p>
 </blockquote>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># load a copy of the ChickWeight data frame</span></span>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># load a copy of the ChickWeight data frame</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>df.cw <span class="ot">&lt;-</span> ChickWeight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+
+</div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Task 1: use your tidyverse knowledge to summarize the mean weight of all </span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Task 1: use your tidyverse knowledge to summarize the mean weight of all </span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="co"># chicks for each diet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Task 2: now make a plot that contains the mean and 95% CI for each diet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Task 2: now make a plot that contains the mean and 95% CI for each diet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Task 3: you're now interested in seeing whether the distribution of</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Task 3: you're now interested in seeing whether the distribution of</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="co"># chick weights varies as a function of time. Make a publication-ready </span></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="co"># figure that plots the distribution of chick weights that separates </span></span>
 <span id="cb17-4"><a href="#cb17-4"></a><span class="co"># the distributions by time, and color code each distribution accordingly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -692,7 +748,7 @@
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Task 4: it has come to your attention that different researchers </span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Task 4: it has come to your attention that different researchers </span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="co"># collected data from different chicks over the course of the experiment, </span></span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="co"># and that two of these researchers might not have followed the protocol </span></span>
 <span id="cb18-4"><a href="#cb18-4"></a><span class="co"># correctly. Specifically, researcher "JP" collected the first 10 chicks, </span></span>
