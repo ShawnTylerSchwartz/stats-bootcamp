@@ -1,0 +1,338 @@
+---
+title: "Intro to Data Visualization in R"
+author: "<strong style='color: #820000;'>Shawn T. Schwartz</strong><br />Stanford Psychology"
+date: 09.23.2022
+format: revealjs
+editor: visual
+incremental: false
+---
+
+## Why visualization matters
+
+-   **For you:** understand what your data look like before running analyses (always!!)
+-   **For your audience:** present compelling figures that not only *look nice*, but also **tell a story**
+
+## A picture's worth 1,000 words...
+
+> The greatest value of a picture is when it forces us to notice what we never expected to see. --John Tukey
+
+-   ALWAYS PLOT YOUR DATA!
+
+------------------------------------------------------------------------
+
+-   Some classic examples (see Psych 252 textbook for more: https://psych252.github.io/psych252book/visualization-1.html)
+
+![](figs/anscombe.png)
+
+------------------------------------------------------------------------
+
+![](figs/datasaurus.png){fig-align="center"}
+
+## Plotting data... the `base R` way
+
+-   Plotting using `base R` methods out-of-the-box can be cumbersome and lacks easy customizability of graphical elements
+
+------------------------------------------------------------------------
+
+> `diamonds`: A dataset containing the prices and other attributes of almost 54,000 diamonds. The variables are as follows:
+
+```{r}
+#| echo: true
+#| code-fold: false 
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+library(tidyverse)
+
+# create a copy of the built-in "diamonds" dataset to manipulate
+df.diamonds <- diamonds
+
+# preview the data frame
+df.diamonds %>% 
+  head(5)
+```
+
+## Plotting data... the `base R` way
+
+```{r}
+#| echo: true
+#| code-fold: false 
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+plot(x = df.diamonds$carat, y = df.diamonds$price)
+```
+
+## Plotting data... the `base R` way
+
+-   We can tweak this a bit using the `plot()` function settings
+
+```{r}
+#| echo: true
+#| code-fold: false 
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+plot(x = df.diamonds$carat, 
+     y = df.diamonds$price, 
+     xlab = "Carat", 
+     ylab = "Price", 
+     main = "Price of diamonds as a function of their carat (weight)")
+```
+
+------------------------------------------------------------------------
+
+-   But we're missing out on other ways of visualizing the data that wouldn't be as intuitive using the `base R` plotting mechanisms
+
+## Introducing `ggplot2`
+
+> *Description:* A system for 'declaratively' creating graphics, based on "The Grammar of Graphics". You provide the data, tell 'ggplot2' how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+
+## Example 1: Linear regression by group
+
+```{r}
+#| echo: true
+#| code-fold: true 
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# first, let's reproduce the base R plot from above
+df.diamonds %>% 
+  ggplot(data = .,
+         mapping = aes(x = carat,
+                       y = price)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm",
+              color = "black") +
+  labs(title = "Price of diamonds as a function of their carat (weight)") +
+  xlab("Carat") +
+  ylab("Price") +
+  theme_classic()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# what happens if we color the data points by their cut
+df.diamonds %>% 
+  ggplot(data = .,
+         mapping = aes(x = carat,
+                       y = price,
+                       color = cut)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm",
+              color = "black") +
+  labs(title = "Price of diamonds as a function of their carat (weight)") +
+  xlab("Carat") +
+  ylab("Price") +
+  theme_classic()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# it looks like the relationship may by influenced by the cut variable
+# let's replot these relationships separately by just adding a 1 line of code!
+df.diamonds %>% 
+  ggplot(data = .,
+         mapping = aes(x = carat,
+                       y = price,
+                       color = cut)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm",
+              color = "black") +
+  facet_grid(rows = vars(cut)) +
+  labs(title = "Price of diamonds as a function of their carat (weight)") +
+  xlab("Carat") +
+  ylab("Price") +
+  theme_classic()
+```
+
+## Let's plot some distributions
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# first, the most basic histogram
+df.diamonds %>% 
+  ggplot(data = .,
+         mapping = aes(x = price)) +
+  geom_histogram(binwidth = 1000) +
+  theme_classic()
+```
+
+## Let's plot some distributions... let's spice things up a little
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# what is the distribution of price by clarity in this data set?
+df.diamonds %>% 
+  ggplot(data = .,
+         mapping = aes(x = price,
+                       fill = cut)) +
+  geom_histogram(binwidth = 250) +
+  facet_grid(rows = vars(cut)) +
+  theme_classic()
+```
+
+## Let's plot some distributions... using some tidyverse verbs
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# what is the distribution of price by clarity in this data set, for just the
+# Very Good and Ideal diamonds?
+df.diamonds %>% 
+  filter(cut == "Very Good" | cut == "Ideal") %>% 
+  ggplot(data = .,
+         mapping = aes(x = price,
+                       fill = cut)) +
+  geom_histogram(binwidth = 250) +
+  facet_grid(rows = vars(cut)) +
+  theme_classic()
+```
+
+## Some more advanced features to make your life easier (`stat_summary()`)
+
+-   You might want to plot the mean for each group with a 95% bootstrapped CI
+-   One way of doing this is to calculate the CI bands separately, put them into a `tidy` data frame, and then plot the mean and error bars using `ggplot2` verbs
+-   But, there's a convenient function that allows you to summarize over data and do the CI band estimation in 1 step (all within the plot code!!)
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# let's first see what the mean and sd weight is by each cut of diamond
+df.diamonds %>% 
+  group_by(cut) %>% 
+  summarise(mean_price = mean(carat),
+            sd_price = sd(carat))
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# now, let's make a fancy (and descriptive) plot of these means using the
+# stat_summary() function
+
+df.diamonds %>% 
+  ggplot(data = .,
+         mapping = aes(x = cut,
+                       y = price,
+                       fill = cut,
+                       color = cut)) +
+  geom_point(alpha = 0.1,
+             position = position_jitterdodge(jitter.width = 1,
+                                             jitter.height = 0,
+                                             dodge.width = 0.5),
+             size = 1.25) +
+  stat_summary(fun.data = "mean_cl_boot",
+               geom = "pointrange",
+               color = "black",
+               position = position_dodge(width = 0.3),
+               shape = 21,
+               size = 1.25) +
+  coord_cartesian(ylim = c(3000, 5500)) +
+  theme_classic()
+```
+
+## Now it's your turn
+
+> The `ChickWeight` data frame has 578 rows and 4 columns from an experiment on the effect of diet on early growth of chicks.
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# load a copy of the ChickWeight data frame
+df.cw <- ChickWeight
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# Task 1: use your tidyverse knowledge to summarize the mean weight of all 
+# chicks for each diet
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# Task 2: now make a plot that contains the mean and 95% CI for each diet
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# Task 3: you're now interested in seeing whether the distribution of
+# chick weights varies as a function of time. Make a publication-ready 
+# figure that plots the distribution of chick weights that separates 
+# the distributions by time, and color code each distribution accordingly
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| code-summary: "Show me the code"
+#| code-overflow: wrap
+
+# Task 4: it has come to your attention that different researchers 
+# collected data from different chicks over the course of the experiment, 
+# and that two of these researchers might not have followed the protocol 
+# correctly. Specifically, researcher "JP" collected the first 10 chicks, 
+# and researcher "HQ" collected the last 10 chicks.
+# Combining your data wrangling and ggplot skills, compare the weights 
+# across time for the chicks that JP collected against the chicks that 
+# HQ collected.
+#
+# Note: there are many ways to go about solving this problem. 
+# Tip: think about the solution that would be the most "readable" to an 
+# outside reviewer of this code (i.e., this whole problem can be solved 
+# using a single paragraph of piped commands).
+```
