@@ -727,40 +727,67 @@
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Task 1: use your tidyverse knowledge to summarize the mean weight of all </span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># chicks for each diet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># chicks for each diet</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a>df.cw <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">group_by</span>(Diet) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">summarise</span>(<span class="at">avg_weight =</span> <span class="fu">mean</span>(weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  Diet  avg_weight
+  &lt;fct&gt;      &lt;dbl&gt;
+1 1           103.
+2 2           123.
+3 3           143.
+4 4           135.</code></pre>
+</div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Task 2: now make a plot that contains the mean and 95% CI for each diet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Task 2: now make a plot that contains the mean and 95% CI for each diet</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>df.cw <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Diet,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>                       <span class="at">y =</span> weight,</span>
+<span id="cb17-6"><a href="#cb17-6"></a>                       <span class="at">fill =</span> Diet)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_cl_boot"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8"></a>               <span class="at">geom =</span> <span class="st">"pointrange"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9"></a>               <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb17-10"><a href="#cb17-10"></a>               <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11"></a>               <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">45</span>, <span class="at">angle =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="viz_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Task 3: you're now interested in seeing whether the distribution of</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># chick weights varies as a function of time. Make a publication-ready </span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co"># figure that plots the distribution of chick weights that separates </span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># the distributions by time, and color code each distribution accordingly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Task 3: you're now interested in seeing whether the distribution of</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="co"># chick weights varies as a function of time. Make a publication-ready </span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># figure that plots the distribution of chick weights that separates </span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># the distributions by time, and color code each distribution accordingly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section class="slide level2">
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Task 4: it has come to your attention that different researchers </span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># collected data from different chicks over the course of the experiment, </span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="co"># and that two of these researchers might not have followed the protocol </span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># correctly. Specifically, researcher "JP" collected the first 10 chicks, </span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="co"># and researcher "HQ" collected the last 10 chicks.</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="co"># Combining your data wrangling and ggplot skills, compare the weights </span></span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="co"># across time for the chicks that JP collected against the chicks that </span></span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="co"># HQ collected.</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="co">#</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a><span class="co"># Note: there are many ways to go about solving this problem. </span></span>
-<span id="cb18-11"><a href="#cb18-11"></a><span class="co"># Tip: think about the solution that would be the most "readable" to an </span></span>
-<span id="cb18-12"><a href="#cb18-12"></a><span class="co"># outside reviewer of this code (i.e., this whole problem can be solved </span></span>
-<span id="cb18-13"><a href="#cb18-13"></a><span class="co"># using a single paragraph of piped commands).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Task 4: it has come to your attention that different researchers </span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># collected data from different chicks over the course of the experiment, </span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># and that two of these researchers might not have followed the protocol </span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># correctly. Specifically, researcher "JP" collected the first 10 chicks, </span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># and researcher "HQ" collected the last 10 chicks.</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="co"># Combining your data wrangling and ggplot skills, compare the weights </span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co"># across time for the chicks that JP collected against the chicks that </span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># HQ collected.</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co"># Note: there are many ways to go about solving this problem. </span></span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="co"># Tip: think about the solution that would be the most "readable" to an </span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># outside reviewer of this code (i.e., this whole problem can be solved </span></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co"># using a single paragraph of piped commands).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 

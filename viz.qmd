@@ -311,6 +311,10 @@ df.cw <- ChickWeight
 
 # Task 1: use your tidyverse knowledge to summarize the mean weight of all 
 # chicks for each diet
+
+df.cw %>% 
+  group_by(Diet) %>% 
+  summarise(avg_weight = mean(weight))
 ```
 
 ------------------------------------------------------------------------
@@ -321,6 +325,19 @@ df.cw <- ChickWeight
 #| code-summary: "Show me the code"
 
 # Task 2: now make a plot that contains the mean and 95% CI for each diet
+df.cw %>% 
+  ggplot(data = .,
+         mapping = aes(x = Diet,
+                       y = weight,
+                       fill = Diet)) +
+  stat_summary(fun.data = "mean_cl_boot",
+               geom = "pointrange",
+               shape = 21,
+               color = "black",
+               size = 2) +
+  theme_classic() +
+  theme(legend.position = "bottom",
+        axis.title.x = element_text(face = "bold", size = 45, angle = 0))
 ```
 
 ------------------------------------------------------------------------
